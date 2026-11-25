@@ -9,12 +9,7 @@ import {
   View,
 } from 'react-native';
 import { styles } from './App.styles';
-
-type Todo = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+import { TodoRow, type Todo } from './components/TodoRow';
 
 const STORAGE_KEY = '@todos-list/tasks';
 
@@ -29,23 +24,6 @@ function isTodo(value: unknown): value is Todo {
 }
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : 'Unknown error';
-}
-
-function TodoRow({
-  todo,
-  onPress,
-}: {
-  todo: Todo;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable onPress={onPress} style={styles.todoRow}>
-      <Text style={styles.checkbox}>{todo.completed ? '✓' : '○'}</Text>
-      <Text style={[styles.todoText, todo.completed && styles.completedText]}>
-        {todo.title}
-      </Text>
-    </Pressable>
-  );
 }
 
 export default function App() {
